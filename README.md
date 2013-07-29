@@ -1,4 +1,6 @@
-codigoaberto
+Código Aberto
 ============
 
-Código aberto
+- Lucas Tonussi
+
+Código aberto é um repositório de códigos rotineiros, nada muito importânte.
