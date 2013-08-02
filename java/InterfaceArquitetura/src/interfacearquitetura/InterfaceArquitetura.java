@@ -6,14 +6,14 @@ import processing.core.PFont;
 public class InterfaceArquitetura extends PApplet {
 	float theta;
 	float noise = .5f;
-	PFont f;
+	PFont font;
 
 	@Override
 	public void setup() {
 		size(800, 800);
 		smooth();
 		background(40);
-		f = createFont("Helvetica", 10, true);
+		font = createFont("Helvetica", 10, true);
 	}
 
 	@Override
@@ -46,15 +46,15 @@ public class InterfaceArquitetura extends PApplet {
 		vertex(20, 100);
 		endShape(CLOSE);
 
-		textFont(f, 20);
+		textFont(font, 20);
 		fill(255, 40);
 		text("X pos////" + mouseX, mouseX + 20, mouseY + 20);
 
-		textFont(f, 17);
+		textFont(font, 17);
 		fill(255, 70);
 		text("Y pos////" + mouseY, mouseX + 25, mouseY - 20);
 
-		textFont(f, 50);
+		textFont(font, 50);
 		fill(255, 2);
 		text(noi, 30, 400);
 
@@ -77,7 +77,7 @@ public class InterfaceArquitetura extends PApplet {
 				arc(0, 0, (mouseX + i) / 2, (mouseX + i) / 2, radians(n + j
 						+ mouseY), radians(n + i + mouseY));
 
-				textFont(f, 10);
+				textFont(font, 10);
 				fill(255, 20);
 				text(i, i, j);
 			}
