@@ -1,15 +1,11 @@
 # -- coding: utf-8
 
-""" A simple PDF accessibility checking WAM
-
-Creation: Anand B Pillai <abpillai at gmail dot com> April 27 2007
-
-Modification History
-
-Anand April 27 07   Added more exception handling. Fixed a
-                    problem in pyPdf which was not reading
-                    certain encrypted PDF docs.
-
+"""
+    A simple PDF accessibility checking WAM
+    Creation: Anand B Pillai <abpillai at gmail dot com> April 27 2007
+    Modification History:
+    Anand April 27 07 Added more exception handling.
+    Fixed a problem in pyPdf which was not reading certain encrypted PDF docs.
 """
 
 

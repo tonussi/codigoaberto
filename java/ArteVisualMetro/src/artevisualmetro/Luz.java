@@ -18,11 +18,16 @@ public class Luz {
 	}
 
 	public void display(Faixa faixa) {
-		p.fill(255, 15);
+		p.fill(255, 5);
+
 		p.noStroke();
+
 		p.beginShape();
-		p.ellipse(posicao.x, posicao.y, brilho, brilho);
-		posicao.lerp(new PVector(faixa.x, faixa.y), 80);
+
+		p.ellipse(posicao.x, posicao.y, brilho / 2.4f, brilho);
+
+		posicao.cross(new PVector(faixa.x, faixa.y));
+
 		p.endShape(PConstants.CLOSE);
 	}
 }
