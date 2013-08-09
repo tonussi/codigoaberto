@@ -4,15 +4,16 @@ import processing.core.PApplet;
 
 public class Grid {
 
+	private final int DEFAULT_GWH = 100;
+
 	private int[][] grid;
 	private final float radius;
 	private final int offSet;
 	private final int spaceGrid;
-	private final int DEFAULT_GWH = 100;
 	private final PApplet processing;
 
-	public Grid(PApplet processing, int gridWidth, int gridHeight, float radius) {
-		this.processing = processing;
+	public Grid(PApplet p, int gridWidth, int gridHeight, float radius) {
+		this.processing = p;
 
 		if (gridWidth > 0 && gridHeight > 0)
 			grid = new int[gridWidth][gridHeight];
