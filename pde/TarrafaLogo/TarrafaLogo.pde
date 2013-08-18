@@ -4,8 +4,6 @@ int state = 0;
 int cx, cy;
 
 
-
-
 void setup() {
   //size(displayWidth, displayHeight);
   //size(displayWidth, displayHeight, P3D);
@@ -23,14 +21,8 @@ void setup() {
   rectMode(CENTER);
   imageMode(CENTER);
 
-  background(40);
+  background(41);
   smooth();
-
-  // The font must be located in the sketch's 
-  // "data" directory to load successfully
-  font = loadFont("BPreplay.otf");
-  textFont(font, 32);
-  text("word", 10, 50);
 }
 
 //public int sketchWidth() {
@@ -49,24 +41,14 @@ void setup() {
 //  return true;
 //}
 
-void mouseClicked() {
+void mouseMoved() {
   cx = mouseX;
   cy = mouseY;
-  state++;
+  grid.updateGrid(cx, cy);
 }
 
 void draw() {
-  background(40);
-
+  background(41);
   grid.display();
-  if (state == 1) {
-    grid.updateGrid(cx, cy);
-  }
-  else if (state == 2) {
-    grid.updateGrid(cx, cy);
-  } 
-  else {
-    state = 0;
-  }
 }
 

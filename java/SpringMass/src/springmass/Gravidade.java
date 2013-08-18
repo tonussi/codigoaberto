@@ -1,5 +1,7 @@
 package springmass;
 
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import processing.core.PConstants;
 
 class Gravity extends Force {
@@ -24,8 +26,8 @@ class Gravity extends Force {
 	}
 
 	private void update() {
-		gx = gval * Math.sin(gmisc * radian);
-		gy = gval * Math.cos(gmisc * radian);
+		gx = gval * sin(gmisc * radian);
+		gy = gval * cos(gmisc * radian);
 	}
 
 	@Override

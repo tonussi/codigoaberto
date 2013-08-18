@@ -60,3 +60,8 @@ local.properties
 
 # PDT-specific
 .buildpath
+
+# Processing
+/pde/libraries/
+/pde/tools/
+/pde/modes/
