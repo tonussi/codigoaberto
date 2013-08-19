@@ -12,7 +12,6 @@
 *.la
 *.a
 
-
 # Libraries
 *.lib
 
@@ -60,6 +59,7 @@ local.properties
 
 # PDT-specific
 .buildpath
+
 
 # Processing
 /pde/libraries/

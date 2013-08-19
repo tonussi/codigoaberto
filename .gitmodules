@@ -1,3 +1,15 @@
 [submodule "pde/PShaderTutorials"]
 	path = pde/PShaderTutorials
 	url = https://github.com/codeanticode/pshader-tutorials.git
+[submodule "pde/Century"]
+	path = pde/Century
+	url = https://github.com/REAS/CENTURY.git
+[submodule "pde/TheAbyss"]
+	path = pde/TheAbyss
+	url = https://github.com/ertdfgcvb/TheAbyss.git
+[submodule "pde/Pomax2DGameEngine"]
+	path = pde/Pomax2DGameEngine
+	url = https://github.com/Pomax/Pjs-2D-Game-Engine.git
+[submodule "pd/hackspd"]
+	path = pd/hackspd
+	url = https://github.com/automata/hackspd.git
