@@ -1,35 +1,43 @@
 Form vertical[], horizontal[];
 float px, py;
 PFont tarrafa;
+int grid;
 
 void setup() {
-  size(940, 200);
+  size(940, 300);
   rectMode(CENTER);
-  //smooth();
-  vertical = new Form[100];
-  horizontal = new Form[100];
+  imageMode(CENTER);
+  ellipseMode(CENTER);
 
-  px = -55;
-  py = -55;
+  //smooth();
+  
+  grid = 55;
+  
+  vertical = new Form[grid];
+  horizontal = new Form[grid];
+
+  px = grid;
+  py = grid;
 
   for (int i = 0; i < vertical.length; i++) {
     vertical[i] = new Form(px, py);
     horizontal[i] = new Form(px, py);
 
-    if (px < width - 55) {
-      px += 55;
+    if (px < width) {
+      px += grid;
     } 
-    else if (py < height - 55) {
-      px = 55;
-      py += 55;
+    else if (py < height) {
+      px = grid;
+      py += grid;
     }
     print(px + " ");
     print(py + " ");
   }
-  background(color(22, 175, 210));
+  background(color(224, 215, 165));
 
-  //#16AFD2
-  //#FCD900
+  //#e0d7a5
+  //#16afd2
+  //#fcd900
 }
 
 void mouseDragged() {
@@ -47,8 +55,6 @@ void draw() {
     horizontal[i].display('h');
     vertical[i].ilumina(vertical, mouseX, mouseY, 'v');
     horizontal[i].ilumina(horizontal, mouseX, mouseY, 'h');
-    vertical[i].colore(252, 217, 0, 5, 85);
-    horizontal[i].colore(252, 217, 0, 5, 85);
   }
 }
 
