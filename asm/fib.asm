@@ -1,7 +1,7 @@
 # Compute first twelve Fibonacci numbers and put in array, then print
       .data
 fibs: .word   0 : 12        # "array" of 12 words to contain fib values
-size: .word  12             # size of "array" 
+size: .word  12             # size of "array"
       .text
       la   $t0, fibs        # load address of array
       la   $t5, size        # load address of size variable
@@ -45,5 +45,3 @@ out:  lw   $a0, 0($t0)      # load fibonacci number for syscall
       addi $t1, $t1, -1     # decrement loop counter
       bgtz $t1, out         # repeat if not finished
       jr   $ra              # return
-	
-
