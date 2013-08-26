@@ -12,7 +12,7 @@ main:
 
    # salvamento de contexto da rotina main		
    addi $sp,$sp,-4	
-   sw   $ra,0($sp)	# endereço para onde se deve retornar ao termino de main
+   sw   $ra,0($sp)	# endereco para onde se deve retornar ao termino de main
 
    # invocacao da rotina que calcula o fatorial
    jal  fact		
@@ -27,7 +27,7 @@ main:
    jal  print_int
 
    # restauracao de contexto da rotina main
-   lw   $ra,0($sp)	# endereço de retorno
+   lw   $ra,0($sp)	# endereco de retorno
    addi $sp,$sp,4 
 
    # retorno da rotina main
