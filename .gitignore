@@ -65,6 +65,7 @@ local.properties
 /pde/libraries/
 /pde/tools/
 /pde/modes/
+/pde/*/data/
 
 # Latex
 /tex/ine5414/
