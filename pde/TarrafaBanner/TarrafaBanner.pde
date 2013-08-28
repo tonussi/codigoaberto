@@ -1,7 +1,7 @@
 Form vertical[], horizontal[];
-float px, py, offSet;
+float px, py, offSetX,offSetY;
 PFont tarrafa;
-int grid, foo, bar;
+int grid, foo, bar, desloc;
 boolean drag, anima;
 
 void setup() {
@@ -9,7 +9,9 @@ void setup() {
   rectMode(CENTER);
 
   grid = 54;
-  offSet = 15;
+  offSetX = -20;
+  offSetY = -10;
+  desloc = 27;
 
   vertical = new Form[grid];
   horizontal = new Form[grid];
@@ -18,8 +20,8 @@ void setup() {
   py = grid;
 
   for (int i = 0; i < vertical.length; i++) {
-    vertical[i] = new Form(px - offSet, py - offSet);
-    horizontal[i] = new Form(px - offSet, py - offSet);
+    vertical[i] = new Form(px - offSetX, py - offSetY);
+    horizontal[i] = new Form(px - offSetX - desloc, py - offSetY - desloc);
 
     if (px < width) {
       px += grid;
@@ -33,8 +35,6 @@ void setup() {
   }
 
   background(color(22, 175, 210));
-  tarrafa = loadFont("LiberationMono-48.vlw");
-  textFont(tarrafa, 32);
 
   //#e0d7a5
   //#16afd2
@@ -44,16 +44,17 @@ void setup() {
   anima = false;
 }
 
-void mouseDragged() {
-  if (mousePressed) {
-    for (int i = 0; i < vertical.length; i++) {
-      vertical[i].desloca(vertical, mouseX, mouseY, 1);
-      horizontal[i].desloca(horizontal, mouseX, mouseY, 1);
-    }
-  }
-}
+//void mouseDragged() {
+//  if (mousePressed) {
+//    for (int i = 0; i < vertical.length; i++) {
+//      vertical[i].desloca(vertical, mouseX, mouseY, 1);
+//      horizontal[i].desloca(horizontal, mouseX, mouseY, 1);
+//    }
+//  }
+//}
 
 void draw() {
+  background(color(255, 255, 255));
   //rectMode(CENTER);
   //background(color(22, 175, 210));
 
@@ -73,7 +74,6 @@ void draw() {
     animaSuave();
     reconstroi();
     animaTarrafa(); //T H C
-    this.notifyAll();
   }
 }
 
@@ -83,7 +83,7 @@ void draw() {
 
 synchronized void animaV() {
   if (random(1000) < 100)
-    vertical[foo].colore(252, parseInt(random(170, 217)), 0, 100, 0, 0, 'b');
+    vertical[foo].colore(252, parseInt(random(0, 10)), 0, 100, 0, 0, 'b');
   else if (random(9000) < 100)
     horizontal[bar].colore(parseInt(random(20, 22)), parseInt(random(130, 175)), 210, 100, 0, 0, 'b');
 }
@@ -110,8 +110,8 @@ void reconstroi() {
   animaSuave();
 
   for (int i = 0; i < vertical.length; i++) {
-    vertical[i].update(px - offSet, py - offSet);
-    horizontal[i].update(px - offSet, py - offSet);
+    vertical[i].update(px - offSetX, py - offSetY);
+    horizontal[i].update(px - offSetX, py - offSetY);
 
     if (px < width) {
       px += grid;
@@ -125,7 +125,7 @@ void reconstroi() {
 
 synchronized void animaH() {
   if (random(1000) < 150)
-    horizontal[foo].colore(parseInt(random(120, 252)), 217, 0, 100, 0, 0, 'b');
+    horizontal[foo].colore(parseInt(random(0, 10)), 0, 0, 100, 0, 0, 'b');
   else if (random(9000) < 100)
     horizontal[bar].colore(parseInt(random(120, 22)), 175, parseInt(random(145, 210)), 100, 0, 0, 'b');
 }
@@ -135,4 +135,3 @@ synchronized void animaF() {
   text("interface arquitetura", width - 430, height - 60);
   text("tarrafa hackerspace", width - 410, height - 20);
 }
-
