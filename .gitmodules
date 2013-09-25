@@ -1,0 +1,6 @@
+[submodule "TheAbyss"]
+	path = TheAbyss
+	url = https://github.com/ertdfgcvb/TheAbyss.git
+[submodule "Century"]
+	path = Century
+	url = https://github.com/REAS/CENTURY.git
