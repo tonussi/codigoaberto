@@ -7,3 +7,6 @@
 [submodule "Ableton"]
 	path = Ableton
 	url = https://github.com/ghztomash/visuals_tutorial.git
+[submodule "libraries/Arduino"]
+	path = libraries/Arduino
+	url = https://github.com/firmata/processing.git
