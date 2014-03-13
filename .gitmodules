@@ -10,6 +10,3 @@
 [submodule "libraries/Arduino"]
 	path = libraries/Arduino
 	url = https://github.com/firmata/processing.git
-[submodule "Pui"]
-	path = Pui
-	url = https://github.com/martinleopold/pUI.git
