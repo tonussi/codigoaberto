@@ -4,5 +4,8 @@ tools/
 modes/
 data/
 .metadata
-*/libs/*
+*/lib*/*
 */bin/*
+.classpath
+.project
+.settings
