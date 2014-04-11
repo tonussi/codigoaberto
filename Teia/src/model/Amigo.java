@@ -1,113 +1,48 @@
 package model;
 
-import java.math.BigInteger;
-
 import processing.core.PApplet;
 import processing.core.PVector;
 
 public class Amigo {
 
-	private String uname, sex, localidade;
-	private int agerank;
-	private BigInteger uid;
-	private PVector localizacao, direcao, aceleracao;
-	PApplet parent;
+	private Info info;
 
-	public Amigo(PApplet p, BigInteger uid, String uname, String sex,
-			String localidade, int agerank) {
+	private PVector local, dir, acel;
+	PApplet processing;
 
-		parent = p;
+	public Amigo(PApplet processing, Info info) {
+		this.processing = processing;
 
-		this.uid = uid;
-		this.uname = uname;
-		this.sex = sex;
-		this.localidade = localidade;
-		this.agerank = agerank;
+		local = new PVector(processing.random(processing.width),
+				processing.random(processing.height));
+		dir = PVector.random2D();
+		acel = PVector.random2D();
 
-		initVectors();
-	}
-
-	public void initVectors() {
-		localizacao = new PVector(parent.random(parent.width / 2),
-				parent.random(parent.height / 2));
-		direcao = new PVector(parent.random(0.2F), parent.random(0.2F));
-		aceleracao = new PVector(parent.random(0.2F), parent.random(0.2F));
+		this.info = info;
 	}
 
 	public void mova() {
-		localizacao.add(direcao);
-		localizacao.add(aceleracao);
+		local.add(dir);
+		local.add(acel);
 	}
 
 	public void display() {
-		parent.pushMatrix();
-		parent.translate(localizacao.x, localizacao.y);
-		parent.fill(0);
-		parent.text(getLocalidade(), localizacao.x, localizacao.y);
-		parent.text(getUname(), localizacao.x, localizacao.y);
-		parent.fill(159, 78, 139);
-		parent.ellipse(localizacao.x, localizacao.y, 10, 10);
-		parent.popMatrix();
-	}
+		processing.pushMatrix();
+		processing.translate(local.x, local.y);
 
-	public String getUname() {
-		return uname;
-	}
+		processing.fill(255);
 
-	public void setUname(String uname) {
-		this.uname = uname;
-	}
+		processing.triangle(local.x, local.y + 3, local.x + 3, local.y,
+				local.x - 3, local.y);
 
-	public String getSex() {
-		return sex;
-	}
+		processing.stroke(255);
+		processing.strokeWeight(2);
+		processing.noFill();
 
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+		processing.ellipse(local.x, local.y, 20, 20);
 
-	public String getLocalidade() {
-		return localidade;
-	}
+		info.adicionaInformacao(local.x, local.y);
 
-	public void setLocalidade(String localidade) {
-		this.localidade = localidade;
+		processing.popMatrix();
 	}
-
-	public int getAgerank() {
-		return agerank;
-	}
-
-	public void setAgerank(int agerank) {
-		this.agerank = agerank;
-	}
-
-	public BigInteger getUid() {
-		return uid;
-	}
-
-	public void setUid(BigInteger uid) {
-		this.uid = uid;
-	}
-
-	public PVector getLocalizacao() {
-		return localizacao;
-	}
-
-	public void setLocalizacao(PVector localizacao) {
-		this.localizacao = localizacao;
-	}
-
-	public PVector getDirecao() {
-		return direcao;
-	}
-
-	public void setDirecao(PVector direcao) {
-		this.direcao = direcao;
-	}
-
-	public PVector getAceleracao() {
-		return aceleracao;
-	}
-
 }
