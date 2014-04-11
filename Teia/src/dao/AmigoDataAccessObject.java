@@ -11,8 +11,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import model.Amigo;
+import model.Info;
 import processing.core.PApplet;
+import processing.core.PFont;
 
 public class AmigoDataAccessObject {
 
@@ -20,12 +21,14 @@ public class AmigoDataAccessObject {
 	private Statement statement;
 	private ResultSet resultSet;
 	private String database, user, pass;
-	PApplet parent;
+	PApplet processing;
+	PFont font;
 
-	public AmigoDataAccessObject(PApplet p, String database, String user,
-			String pass) {
-		parent = p;
+	public AmigoDataAccessObject(PApplet processing, PFont font,
+			String database, String user, String pass) {
 
+		this.font = font;
+		this.processing = processing;
 		this.database = database;
 		this.user = user;
 		this.pass = pass;
@@ -133,19 +136,19 @@ public class AmigoDataAccessObject {
 		}
 	}
 
-	public List<Amigo> listadeAmigos() {
+	public List<Info> listadeAmigos() {
 
-		ArrayList<Amigo> amigos = new ArrayList<Amigo>();
+		ArrayList<Info> infos = new ArrayList<Info>();
 
 		try {
 
 			connection = connectToDatabaseOrDie(database, user, pass);
 			statement = connection.createStatement();
 			resultSet = statement
-					.executeQuery("SELECT uid, uname, sex, locale, agerank FROM amigos where agerank < 20");
+					.executeQuery("SELECT uid, uname, sex, locale, agerank FROM amigos where agerank < 300");
 
 			while (resultSet.next())
-				amigos.add(new Amigo(parent, BigInteger.valueOf(Long
+				infos.add(new Info(processing, font, BigInteger.valueOf(Long
 						.valueOf(resultSet.getString(1))), resultSet
 						.getString(2), resultSet.getString(3), resultSet
 						.getString(4), resultSet.getInt(5)));
@@ -170,7 +173,7 @@ public class AmigoDataAccessObject {
 			}
 		}
 
-		return amigos;
+		return infos;
 	}
 
 	public Connection connectToDatabaseOrDie(String database, String user,
