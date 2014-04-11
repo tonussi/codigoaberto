@@ -4,6 +4,7 @@ import java.math.BigInteger;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
+import processing.core.PFont;
 
 public class Info {
 
@@ -11,9 +12,10 @@ public class Info {
 	private int agerank;
 	private BigInteger uid;
 	PApplet processing;
+	PFont font;
 
-	public Info(PApplet processing, BigInteger uid, String sex, String origem,
-			String uname, int agerank) {
+	public Info(PApplet processing, PFont font, BigInteger uid, String sex,
+			String origem, String uname, int agerank) {
 
 		this.processing = processing;
 		this.uname = uname;
@@ -21,14 +23,15 @@ public class Info {
 		this.origem = origem;
 		this.agerank = agerank;
 		this.uid = uid;
+		this.font = font;
 
 	}
 
 	public void adicionaInformacao(float x, float y) {
 		processing.fill(255);
-		processing.textAlign(PConstants.CENTER);
-		processing.textAlign(PConstants.RIGHT);
-		processing.text(toString(), x, y + 50 / 2 + 20);
+		processing.textAlign(PConstants.LEFT);
+		processing.textFont(font);
+		processing.text(toString(), x, y + 10 / 2 + 10);
 	}
 
 	@Override
