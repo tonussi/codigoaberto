@@ -31,7 +31,7 @@ public class Info {
 		processing.fill(255);
 		processing.textAlign(PConstants.LEFT);
 		processing.textFont(font);
-		processing.text(toString(), x, y + 10 / 2 + 10);
+		processing.text(toString(), x, y + 20);
 	}
 
 	@Override
