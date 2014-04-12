@@ -1,26 +1,31 @@
 package model;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import processing.core.PApplet;
 
 public class Nodo {
 
 	private BigInteger valor;
-	private Set nos;
+	private Set nodos;
+	PApplet processing;
 
-	public Nodo(BigInteger valor, HashSet<BigInteger> nos) {
-		super();
+	public Nodo(PApplet processing, BigInteger valor, List<BigInteger> nodos) {
+		this.processing = processing;
 		this.valor = valor;
-		this.nos = nos;
+		this.nodos = new HashSet<BigInteger>(nodos);
 	}
 
 	public Set getNos() {
-		return nos;
+		return nodos;
 	}
 
 	public void setNos(Set nos) {
-		this.nos = nos;
+		nodos = nos;
 	}
 
 	public BigInteger getValor() {
