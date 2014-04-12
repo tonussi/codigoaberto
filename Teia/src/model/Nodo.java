@@ -1,7 +1,6 @@
 package model;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,30 +9,33 @@ import processing.core.PApplet;
 
 public class Nodo {
 
-	private BigInteger valor;
-	private Set nodos;
+	private BigInteger identificador;
+	private Set<BigInteger> nodos;
 	PApplet processing;
 
-	public Nodo(PApplet processing, BigInteger valor, List<BigInteger> nodos) {
+	public Nodo(PApplet processing, BigInteger identificador,
+			List<BigInteger> nodos) {
+
 		this.processing = processing;
-		this.valor = valor;
+		this.identificador = identificador;
 		this.nodos = new HashSet<BigInteger>(nodos);
+
 	}
 
-	public Set getNos() {
+	public Set<BigInteger> getNodos() {
 		return nodos;
 	}
 
-	public void setNos(Set nos) {
-		nodos = nos;
+	public void setNos(Set<BigInteger> nodos) {
+		this.nodos = nodos;
 	}
 
-	public BigInteger getValor() {
-		return valor;
+	public BigInteger getidentificador() {
+		return identificador;
 	}
 
-	public void setValor(BigInteger valor) {
-		this.valor = valor;
+	public void setidentificador(BigInteger identificador) {
+		this.identificador = identificador;
 	}
 
 }
