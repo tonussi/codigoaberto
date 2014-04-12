@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import model.Info;
+import model.Nodo;
 import processing.core.PApplet;
 import processing.core.PFont;
 
@@ -109,7 +110,7 @@ public class AmigoDataAccessObject {
 			connection = connectToDatabaseOrDie(database, user, pass);
 			statement = connection.createStatement();
 			resultSet = statement
-					.executeQuery("SELECT * FROM amigos INNER JOIN relacoes ON amigos.uid = relacoes.node1");
+					.executeQuery("SELECT uid, node1, node2 FROM amigos INNER JOIN relacoes ON amigos.uid = relacoes.node1");
 
 			while (resultSet.next())
 				System.out.println(resultSet.getString(1)
@@ -174,6 +175,61 @@ public class AmigoDataAccessObject {
 		}
 
 		return infos;
+	}
+
+	public List<Nodo> listadeRelacoes() {
+
+		ArrayList<Nodo> nodos = new ArrayList<Nodo>();
+		List<BigInteger> relacoesParaHashSet = new ArrayList<BigInteger>();
+		int oid = 0;
+
+		try {
+
+			connection = connectToDatabaseOrDie(database, user, pass);
+
+			resultSet = statement
+					.executeQuery("SELECT oid FROM relacoes LIMIT 1");
+
+			if (resultSet.next())
+				oid = resultSet.getInt(1);
+			else
+				return null;
+
+			while (oid < 50000) {
+				resultSet = statement
+						.executeQuery("SELECT node1 FROM relacoes WHERE oid = "
+								+ oid);
+				oid = oid + 1;
+
+				while (resultSet.next())
+					relacoesParaHashSet.add(BigInteger.valueOf(Long
+							.valueOf(resultSet.getString(1))));
+
+				nodos.add(new Nodo(processing, BigInteger.valueOf(Long
+						.valueOf(resultSet.getString(1))), relacoesParaHashSet));
+			}
+
+		} catch (SQLException ex) {
+			Logger lgr = Logger
+					.getLogger(AmigoDataAccessObject.class.getName());
+			lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+		} finally {
+
+			try {
+				if (resultSet != null)
+					resultSet.close();
+				if (connection != null)
+					connection.close();
+
+			} catch (SQLException ex) {
+				Logger lgr = Logger.getLogger(AmigoDataAccessObject.class
+						.getName());
+				lgr.log(Level.WARNING, ex.getMessage(), ex);
+			}
+		}
+
+		return nodos;
 	}
 
 	public Connection connectToDatabaseOrDie(String database, String user,
