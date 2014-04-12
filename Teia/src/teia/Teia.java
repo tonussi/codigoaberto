@@ -35,9 +35,6 @@ public class Teia extends PApplet {
 		for (Info info : infos)
 			amigos.add(new Amigo(this, info));
 
-		arestas = new ArrayList<Aresta>();
-
-		arestas.add(new Aresta(this, 40, 20, 40));
 	}
 
 	@Override
