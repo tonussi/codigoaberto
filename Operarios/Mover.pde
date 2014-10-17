@@ -7,15 +7,22 @@ class Mover {
   private float bounce;
   private float r;
   private boolean colliding;
-  private int len;
+  private float len;
   private float arrowsize;
+  private float LENGHT_ANTENA;
+  private color cor2;
+  private color cor1;
 
   Mover(PVector v, PVector l) {
     vel = v.get();
     loc = l.get();
 
     bounce = 1.0;
-    r = 10;
+
+    r = random(10, 20);
+    LENGHT_ANTENA = r + 0xf;
+
+
     colliding = false;
   }
 
@@ -32,15 +39,25 @@ class Mover {
     ellipse(1, 1, r, r);
     popMatrix();
 
-    drawVector(vel, loc, 10);
+    drawVector(vel, loc, LENGHT_ANTENA);
   }
 
-  void recolor(float kicksize, float snaresize, float hatsize) {
-    strokeWeight(2);
-    stroke(0);
-    fill((int)kicksize, (int)snaresize << 3, (int)hatsize);
-    strokeWeight(1);
-    stroke(220, (int)snaresize << 1, 230);
+  void recolor(boolean snare, boolean hat, boolean kick) {
+    if (kick && !snare && !hat) {
+      cor2 = color(120, 40, 130, 30);
+      cor1 = color(40, 90, 120, 90);
+    } else if (snare && !kick && !hat) {
+      cor2 = color(30, 110, 180, 30);
+      cor1 = color(40, 30, 70, 90);
+    } else if (hat && !snare && !kick) {
+      cor2 = color(20, 140, 120, 30);
+      cor1 = color(10, 30, 200, 90);
+    } else if (hat || snare && !kick) {
+      cor2 = color(130, 40, 120);
+      cor1 = color(10, 30, 200, 90);
+    }
+    fill(cor1);
+    stroke(cor2);
   }
 
   void drawVector(PVector v, PVector loc, float scayl) {
@@ -48,10 +65,10 @@ class Mover {
     arrowsize = 20;
     translate(loc.x, loc.y);
     rotate(v.heading2D());
-    len = (int) v.mag() << (int) scayl;
-      line(0, 0, len, 0);
-      line(len, 0, len-arrowsize, +arrowsize);
-      line(len, 0, len-arrowsize, -arrowsize);
+    len = v.mag() * scayl;
+    line(0, 0, len, 0);
+    line(len, 0, len-arrowsize, +arrowsize);
+    line(len, 0, len-arrowsize, -arrowsize);
     popMatrix();
   }
 
@@ -110,4 +127,3 @@ class Mover {
     }
   }
 }
-

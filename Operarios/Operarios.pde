@@ -14,20 +14,23 @@ int t, POPULATION;
 void setup() {
   minim = new Minim(this);
 
-  //background(#00FF00);
-  background(#ffffff);
+  background(#00FF00);
+  //background(#ffffff);
 
   POPULATION = 160;
 
   size(1200, 600);
 
   l = new ArrayList<Mover>();
+  
+  int height2 = height;
+  int width2 = width;
 
   for (int i = 0; i < POPULATION; i++) {
-    l.add(new Mover(new PVector(random(-0.35, 0.35), random(-0.35, 0.35)), new PVector(random(width), random(height))));
+    l.add(new Mover(new PVector(random(-0.5, 0.5), random(-0.5, 0.5)), new PVector(random(width2), random(height2))));
   }
 
-  song = minim.loadFile("song.mp3", 1024);
+  song = minim.loadFile("darkambient.mp3", 2048);
   song.play();
 
   beat = new BeatDetect(song.bufferSize(), song.sampleRate());
@@ -41,30 +44,11 @@ void setup() {
 }
 
 void draw() {
-  background(43);
-
-  if (beat.isKick())
-    kicksize = 32;
-  if (beat.isSnare())
-    snaresize = 32;
-  if (beat.isHat())
-    hatsize = 32;
-
-  textSize(kicksize);
-  text("KICK", width/4, height/2);
-  textSize(snaresize);
-  text("SNARE", width/2, height/2);
-  textSize(hatsize);
-  text("HAT", 3*width/4, height/2);
-  noFill();
-
-  kicksize = constrain(kicksize * 0.95, 16, 32);
-  snaresize = constrain(snaresize * 0.95, 16, 32);
-  hatsize = constrain(hatsize * 0.95, 16, 32);
+  background(0x2c);
 
   for (Mover v : l) {
     v.go();
-    v.recolor(kicksize, snaresize, hatsize);
+    v.recolor(beat.isSnare(), beat.isHat(), beat.isKick());
     for (Mover k : l)
       v.collideEqualMass(k);
   }
@@ -73,16 +57,15 @@ void draw() {
 }
 
 void ilusao() {
-  fill(#ffffff);
-  rect(180, 0, 10, height);
-  rect(990, 0, 10, height);
+  noStroke();
+  fill(255);
+  rect(200, 0, 5, height);
+  rect(970, 0, 5, height);
+  noFill();
 }
 
 void keyPressed() {
-
   if (key == 's') {
-    set(0, 0, get(0, 0, width, height));
-    save("pics/frame-" + nf(frameCount, 4) + ".png");
+    saveFrame("frames/####.png");
   }
 }
-
