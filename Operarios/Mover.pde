@@ -12,6 +12,7 @@ class Mover {
   private float LENGHT_ANTENA;
   private color cor2;
   private color cor1;
+  private int kickCounter;
 
   Mover(PVector v, PVector l) {
     vel = v.get();
@@ -42,22 +43,73 @@ class Mover {
     drawVector(vel, loc, LENGHT_ANTENA);
   }
 
-  void recolor(boolean snare, boolean hat, boolean kick) {
+  void moveConformeMusica(boolean snare, boolean hat, boolean kick, BeatDetect beat) {
+
     if (kick && !snare && !hat) {
-      cor2 = color(120, 40, 130, 30);
-      cor1 = color(40, 90, 120, 90);
-    } else if (snare && !kick && !hat) {
-      cor2 = color(30, 110, 180, 30);
-      cor1 = color(40, 30, 70, 90);
-    } else if (hat && !snare && !kick) {
-      cor2 = color(20, 140, 120, 30);
-      cor1 = color(10, 30, 200, 90);
-    } else if (hat || snare && !kick) {
-      cor2 = color(130, 40, 120);
-      cor1 = color(10, 30, 200, 90);
+
+      PVector n = PVector.sub(PVector.random2D(), loc);
+      n.normalize();
+
+      PVector u = PVector.sub(PVector.random2D(), vel);
+
+      PVector un = componentVector(u, n);
+
+      u.sub(un);
+
+      vel = PVector.add(u, vel);
+      vel = PVector.add(un, vel);
+    } else if (!kick && snare && !hat && kickCounter >= 110) {
+
+      vel.y = random(-1, 1);
+      vel.x = random(-1, 1);
+    
+    } else if (!kick && !snare && hat && kickCounter >= 110) {
+
+      vel.y = random(-1, 1);
+      vel.x = random(-1, 1);
+    
     }
+
+    kickCounter++;
+
+    if (!kick && !snare && !hat && kickCounter >= 110) {
+
+      vel.x = 0;
+
+      vel.y = 0;
+
+      kickCounter = 0;
+
+      println(kickCounter);
+    }
+  }
+
+  void coloreConformeMusica(boolean snare, boolean hat, boolean kick, BeatDetect beat) {
+
+    if (kick && !snare && !hat) {
+
+      cor1 = color(#BE57D3, 30);
+
+      cor2 = color(#B09ECE, 30);
+
+    } else if (!kick && !snare && hat) {
+
+      cor1 = color(#57A3D3, 30);
+
+      cor2 = color(#E8ABE7, 30);
+
+    } else {
+
+      cor1 = color(#57A3D3, 30);
+
+      cor2 = color(#C7E0CF, 30);
+
+    }
+
     fill(cor1);
+
     stroke(cor2);
+
   }
 
   void drawVector(PVector v, PVector loc, float scayl) {
